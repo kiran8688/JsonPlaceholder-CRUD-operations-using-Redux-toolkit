@@ -13,9 +13,6 @@ const Comments = () => {
         dispatch(showComments(userId))
     }, [userId, dispatch])
     console.log(comment);
-    const clickHandler = (id) => {
-
-    }
     var commentDisplay
 
     commentDisplay = Object.values(comment?.comments?.commentsList).map((comment, index) => {
@@ -39,7 +36,7 @@ const Comments = () => {
     commentsRender = (<Col xxl={8} className='row ms-3 mt-5 border-3 border-start border-secondary ' >
         <div className='d-flex  justify-content-between' style={{ alignItems: 'center' }}>
             <h1 className='text-center'>{comment?.userDetails?.userDetailsList?.name}'s Comments</h1>
-            <Button variant='primary'>+ Add a Comment</Button>
+            <Button variant='primary'> + Add a Comment </Button>
         </div>
         {commentDisplay}
     </Col>)

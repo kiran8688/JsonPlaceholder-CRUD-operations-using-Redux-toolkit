@@ -1,4 +1,4 @@
-import { Col, Container, Row } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 import './App.css';
 import Users from './Components/Users';
 import UserDetails from './Components/UserDetails';

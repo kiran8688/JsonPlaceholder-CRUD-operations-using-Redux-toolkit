@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { Col, Container, Image, Row } from 'react-bootstrap'
+import { Col, Container, Image } from 'react-bootstrap'
 import { IdContext } from '../App'
 import { showUserDetailSlice } from '../Slices/UserDetailsSlice'
 import Accordion from 'react-bootstrap/Accordion';
@@ -12,13 +12,11 @@ import taskIcon from '../assets/task_alt_black_24dp.svg'
 import postIcon from '../assets/segment_white_24dp.svg'
 import imageIcon from '../assets/image_white_24dp.svg'
 import commentIcon from '../assets/comment-text-outline.svg'
-import { albums, posts, todos } from '../Slices/RouteSlice'
-import { Link, Outlet, useNavigate } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import { LinkContainer } from 'react-router-bootstrap'
 
 
 const UserDetails = () => {
-    const navigate = useNavigate()
     const { userId } = useContext(IdContext)
     const userDetail = useSelector(state => state?.userDetails?.userDetailsList)
     const dispatch = useDispatch()

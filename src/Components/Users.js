@@ -6,17 +6,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { showUsers } from '../Slices/userSlice';
 import { IdContext } from '../App';
 import { showUserDetailSlice } from '../Slices/UserDetailsSlice';
-import { useNavigate } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 
 const Users = () => {
-    const navigate = useNavigate()
     const { setUserId } = useContext(IdContext)
     const user = useSelector(state => state)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(showUsers())
-    }, [])
+    }, [dispatch])
     const clickHandler = (id) => {
         setUserId(id)
         dispatch(showUserDetailSlice(id))
@@ -35,7 +33,7 @@ const Users = () => {
                             {person?.company?.bs}<br />
                             {person?.company?.catchPhrase}
                         </Card.Text>
-                        <LinkContainer to={`users/${person?.id}/`}>
+                        <LinkContainer to={`users/${person.id}`}>
                         <Button variant="primary" onClick={() => clickHandler(person?.id)}>Show More</Button>
                         </LinkContainer>
                     </Card.Body>

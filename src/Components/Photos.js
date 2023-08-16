@@ -13,9 +13,6 @@ const Photos = () => {
         dispatch(showPhotosSlice(userId))
     }, [userId, dispatch])
     console.dir(photo);
-    const clickHandler = (id) => {
-
-    }
     var photoDisplay
 
     photoDisplay = Object.values(photo.photos.photosList).map((photo, index) => {
