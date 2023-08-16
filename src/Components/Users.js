@@ -24,7 +24,7 @@ const Users = () => {
     var userDisplay
     userDisplay = Object.values(user?.users?.usersList).map((person) => {
         return (
-            <Col xxl={3} className='mb-5' key={person?.id}>
+            <Col xxl={3} className='mt-5' key={person?.id}>
                 <Card className="text-center">
                     <Card.Header className='d-flex justify-content-between align-items-center'><h6 className='mb-0 text-secondary'>userID:{person?.id}</h6> <p className='mb-0 text-primary'>@{person?.username}</p></Card.Header>
                     <Card.Body>
@@ -44,7 +44,6 @@ const Users = () => {
     })
     return (
         <>
-            <h2>User List</h2>
             {user?.loading && <div>Loading...</div>}
             {!user?.loading && user?.error ? <div>Error: {user.error}</div> : null}
             {!user?.loading && user?.users?.usersList?.length ? userDisplay : null}

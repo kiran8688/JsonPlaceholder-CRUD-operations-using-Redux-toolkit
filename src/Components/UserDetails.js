@@ -28,7 +28,7 @@ const UserDetails = () => {
 
     return (
         <>
-            <Col style={{ backgroundColor: '#f7f7f7', height: '100vmin', alignContent: 'flex-start' }} className='row justify-content-center ' xxl={4}>
+            <Col style={{ backgroundColor: '#f7f7f7', height: '100vmin', alignContent: 'flex-start' }} className='row justify-content-center mt-5' xxl={4}>
                 <Image className='col-8 mt-5 mb-5' style={{ borderRadius: 100, height: '35vmin' }} src='https://www.kindpng.com/picc/m/136-1369892_avatar-people-person-business-user-man-character-avatar.png' />
                 <Container className='col-12'>
                     <div className='row d-flex justify-content-center mb-3'>

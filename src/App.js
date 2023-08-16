@@ -1,4 +1,4 @@
-import { Container, Row } from 'react-bootstrap';
+import { Container, Navbar, Row } from 'react-bootstrap';
 import './App.css';
 import Users from './Components/Users';
 import UserDetails from './Components/UserDetails';
@@ -16,8 +16,13 @@ export const IdContext = createContext()
 function App() {
   const [userId, setUserId] = useState(0)
   // console.log(userId);
-  return (
-    <Container fluid className="App" style={{backgroundColor: '#f7f7f7'}} >
+  return (<>
+       <Navbar className="bg-primary" variant='dark'>
+        <Container className='d-flex justify-content-center'>
+          <Navbar.Brand className='fs-2'>Welcome to Users Portal</Navbar.Brand>
+        </Container>
+      </Navbar>
+    <Container fluid xxl={12} className="App" style={{backgroundColor: '#f7f7f7'}} >
       <IdContext.Provider value={{ userId, setUserId }}>
 
         <Row className='d-flex' style={{ alignItems: 'flex-start' }}>
@@ -41,6 +46,7 @@ function App() {
         </Row>
       </IdContext.Provider>
     </Container >
+  </>
   );
 }
 export default App;
