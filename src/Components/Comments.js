@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useEffect, useContext } from 'react'
 import { IdContext } from '../App'
 import { useDispatch, useSelector } from 'react-redux'
@@ -7,15 +7,18 @@ import { showComments } from '../Slices/CommentsSlice'
 
 const Comments = () => {
     const { userId } = useContext(IdContext)
-    const comment = useSelector(state => state)
+    const comments = useSelector(state => state.comments)
+    const userDetails = useSelector(state => state.userDetails)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(showComments(userId))
     }, [userId, dispatch])
-    console.log(comment);
+    console.log(comments);
     var commentDisplay
 
-    commentDisplay = Object.values(comment?.comments?.commentsList).map((comment, index) => {
+    const memoizedCommentsList = useMemo(() => Object.values(comments?.commentsList || {}), [comments?.commentsList])
+
+    commentDisplay = memoizedCommentsList.map((comment, index) => {
         return (
             <Col xxl={4} className='mb-4' key={comment.id}>
 
@@ -35,7 +38,7 @@ const Comments = () => {
 
     commentsRender = (<Col xxl={8} className='row ms-3 mt-5 border-3 border-start border-secondary ' >
         <div className='d-flex  justify-content-between' style={{ alignItems: 'center' }}>
-            <h1 className='text-center'>{comment?.userDetails?.userDetailsList?.name}'s Comments</h1>
+            <h1 className='text-center'>{userDetails?.userDetailsList?.name}'s Comments</h1>
             <Button variant='primary'> + Add a Comment </Button>
         </div>
         {commentDisplay}
@@ -44,9 +47,9 @@ const Comments = () => {
     return (
         <>
 
-            {comment?.comments?.loading && <div>Loading...</div>}
-            {!comment?.comments?.loading && comment?.comments?.error ? <div>Error: {comment?.comments.error}</div> : null}
-            {!comment?.comments?.loading && comment?.comments?.commentsList?.length ? commentsRender : null}
+            {comments?.loading && <div>Loading...</div>}
+            {!comments?.loading && comments?.error ? <div>Error: {comments.error}</div> : null}
+            {!comments?.loading && comments?.commentsList?.length ? commentsRender : null}
 
 
         </>
