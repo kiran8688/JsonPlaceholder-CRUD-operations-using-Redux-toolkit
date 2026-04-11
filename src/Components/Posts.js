@@ -12,10 +12,6 @@ const Posts = () => {
     useEffect(() => {
         dispatch(showPosts(userId))
     }, [userId, dispatch])
-    console.log(postDetail);
-    const clickHandler = (id) => {
-        // dispatch()
-    }
     var postDisplay
 
     postDisplay = Object.values(postDetail?.posts?.postsList).map((post, index) => {
@@ -28,7 +24,7 @@ const Posts = () => {
                         <Card.Text className='text-truncate'>
                             {post?.body}
                         </Card.Text>
-                        <Button variant="primary" onClick={() => clickHandler(post?.id)}>Show Post</Button>
+                        <Button variant="primary">Show Post</Button>
                     </Card.Body>
                 </Card>
             </Col>

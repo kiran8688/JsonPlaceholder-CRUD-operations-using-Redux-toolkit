@@ -11,11 +11,6 @@ const Todo = () => {
     useEffect(() => {
         dispatch(showTodoSlice(userId))
     }, [userId, dispatch])
-    console.log(todoDetail);
-    const clickHandler = (id) => {
-
-    }
-
     var todoDisplay
 
     todoDisplay = Object.values(todoDetail?.todos?.todoList).map((todo, index) => {
@@ -26,7 +21,7 @@ const Todo = () => {
                     <Card.Body className='' style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                         <Card.Title>{todo?.title}</Card.Title>
                         <div className='d-flex justify-content-around'>
-                            <Button variant="primary" onClick={() => clickHandler(todo?.id)}>Mark as Complete</Button>
+                            <Button variant="primary">Mark as Complete</Button>
                             <Button variant='danger'>Delete</Button>
                         </div>
                     </Card.Body>
