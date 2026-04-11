@@ -13,10 +13,6 @@ const Albums = () => {
     useEffect(() => {
         dispatch(showAlbumSlice(userId))
     }, [userId, dispatch])
-    console.log(albumDetail);
-    const clickHandler = (id) => {
-
-    }
     var albumDisplay
 
     albumDisplay = Object.values(albumDetail?.albums?.albumsList).map((album, index) => {
@@ -28,7 +24,7 @@ const Albums = () => {
                     <Card.Body>
                         <Card.Title>{album?.title}</Card.Title>
                         <LinkContainer to={`photos`}>
-                        <Button variant="primary" onClick={() => clickHandler(album?.id)}>Show Album</Button>
+                        <Button variant="primary">Show Album</Button>
                         </LinkContainer>
                     </Card.Body>
                 </Card>
