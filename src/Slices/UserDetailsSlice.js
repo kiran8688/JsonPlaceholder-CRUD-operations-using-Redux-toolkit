@@ -3,7 +3,6 @@ import axios from "axios";
 export const showUserDetailSlice = createAsyncThunk(
   "userDetails",
   async (id) => {
-    console.log(id);
     return await axios
       .get(`https://jsonplaceholder.typicode.com/users/${id}`)
       .then((response) => response.data);

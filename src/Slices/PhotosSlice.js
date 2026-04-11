@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 export const showPhotosSlice = createAsyncThunk("photos", async (id) => {
-  console.log(id);
   return await axios
     .get(`https://jsonplaceholder.typicode.com/albums/${id}/photos`)
     .then((response) => response.data);
