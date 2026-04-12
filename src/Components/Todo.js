@@ -22,7 +22,7 @@ const Todo = () => {
         return (
             <Col xxl={4} className='mb-4' key={todo.id}>
                 <Card border={(todo?.completed === true) ? 'success' : 'danger'} className="text-center border-2" style={{ height: '12vmax' }} >
-                    <Card.Header className='d-flex justify-content-between align-items-center'><h6 className='mb-0 text-secondary'>Todo Number:{[index + 1]}</h6></Card.Header>
+                    <Card.Header className='d-flex justify-content-between align-items-center'><h6 className="mb-0 text-gray-600">Todo Number:{[index + 1]}</h6></Card.Header>
                     <Card.Body className='' style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                         <Card.Title>{todo?.title}</Card.Title>
                         <div className='d-flex justify-content-around'>

@@ -22,7 +22,7 @@ const Posts = () => {
         return (
             <Col xxl={4} className='mb-4' key={post.id}>
                 <Card className="text-center" >
-                    <Card.Header className='d-flex justify-content-between align-items-center'><h6 className='mb-0 text-secondary'>Post ID:{[index + 1]}</h6></Card.Header>
+                    <Card.Header className='d-flex justify-content-between align-items-center'><h6 className="mb-0 text-gray-600">Post ID:{[index + 1]}</h6></Card.Header>
                     <Card.Body style={{ textAlign: 'left' }}>
                         <Card.Title className='text-success'>{post?.title}</Card.Title>
                         <Card.Text className='text-truncate'>

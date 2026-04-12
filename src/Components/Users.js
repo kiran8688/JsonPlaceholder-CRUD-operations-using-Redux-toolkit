@@ -26,7 +26,7 @@ const Users = () => {
         return (
             <Col xxl={3} className='mt-5' key={person?.id}>
                 <Card className="text-center">
-                    <Card.Header className='d-flex justify-content-between align-items-center'><h6 className='mb-0 text-secondary'>userID:{person?.id}</h6> <p className='mb-0 text-primary'>@{person?.username}</p></Card.Header>
+                    <Card.Header className='d-flex justify-content-between align-items-center'><h6 className="mb-0 text-gray-600">userID:{person?.id}</h6> <p className="mb-0 text-blue-600">@{person?.username}</p></Card.Header>
                     <Card.Body>
                         <Card.Title>{person?.name}</Card.Title>
                         <Card.Text>

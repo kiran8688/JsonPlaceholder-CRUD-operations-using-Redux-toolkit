@@ -24,7 +24,7 @@ const Albums = () => {
             <Col xxl={4} className='mb-4' key={album.id}>
 
                 <Card className="text-center">
-                    <Card.Header className='d-flex justify-content-between align-items-center'><h6 className='mb-0 text-secondary'>Album ID:{[index + 1]}</h6></Card.Header>
+                    <Card.Header className='d-flex justify-content-between align-items-center'><h6 className="mb-0 text-gray-600">Album ID:{[index + 1]}</h6></Card.Header>
                     <Card.Body>
                         <Card.Title>{album?.title}</Card.Title>
                         <LinkContainer to={`photos`}>
