@@ -23,7 +23,7 @@ const Comments = () => {
             <Col xxl={4} className='mb-4' key={comment.id}>
 
                 <Card className="text-left">
-                    <Card.Header className='d-flex justify-content-between align-items-center'><h6 className='mb-0 text-secondary'>comment ID:{[index + 1]}</h6></Card.Header>
+                    <Card.Header className='d-flex justify-content-between align-items-center'><h6 className="mb-0 text-gray-600">comment ID:{[index + 1]}</h6></Card.Header>
                     <Card.Body>
                         <Card.Title className='text-danger'>{comment?.name}</Card.Title>
                         <Card.Text>{comment?.body}</Card.Text>
