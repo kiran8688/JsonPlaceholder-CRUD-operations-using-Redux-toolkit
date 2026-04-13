@@ -1,11 +1,8 @@
-import React, { useContext } from 'react'
-import { useSelector } from 'react-redux'
-import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { Col, Container, Image } from 'react-bootstrap'
+import React, { useContext, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { Col, Container, Image, Card, Row, Badge } from 'react-bootstrap'
 import { IdContext } from '../App'
 import { showUserDetailSlice } from '../Slices/UserDetailsSlice'
-import Accordion from 'react-bootstrap/Accordion';
 import Button from 'react-bootstrap/Button';
 import albumsIcon from '../assets/photo_album_white_24dp.svg'
 import taskIcon from '../assets/task_alt_black_24dp.svg'
@@ -15,98 +12,127 @@ import commentIcon from '../assets/comment-text-outline.svg'
 import { Outlet } from 'react-router-dom'
 import { LinkContainer } from 'react-router-bootstrap'
 
+const SectionCard = ({ title, children }) => (
+    <Card className="mb-4 border-0 shadow-sm" style={{ borderRadius: '16px', backgroundColor: '#ffffff' }}>
+        <Card.Body className="p-4">
+            <h5 style={{ fontFamily: 'Manrope, sans-serif', fontWeight: 700, color: '#32313b', marginBottom: '1.5rem' }}>{title}</h5>
+            {children}
+        </Card.Body>
+    </Card>
+);
+
+const DetailRow = ({ label, value }) => (
+    <Row className="mb-3 align-items-center">
+        <Col xs={4} style={{ color: '#5f5e68', fontSize: '0.9rem', fontWeight: 600 }}>{label}</Col>
+        <Col xs={8} style={{ color: '#32313b', fontSize: '1rem', fontWeight: 500 }}>{value || 'N/A'}</Col>
+    </Row>
+);
+
+const NavButton = ({ to, icon, label, variantCode }) => (
+    <LinkContainer to={to}>
+        <Button
+            className="w-100 d-flex flex-column align-items-center justify-content-center p-3 mb-3 border-0"
+            style={{
+                backgroundColor: variantCode,
+                borderRadius: '12px',
+                transition: 'transform 0.2s ease',
+                boxShadow: '0 4px 6px rgba(0,0,0,0.05)'
+            }}
+            onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
+            onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+        >
+            <img src={icon} alt={`${label} icon`} height={28} className="mb-2" style={{ filter: 'brightness(0) invert(1)' }} />
+            <span style={{ fontWeight: 600, color: '#ffffff', fontSize: '0.9rem' }}>{label}</span>
+        </Button>
+    </LinkContainer>
+);
 
 const UserDetails = () => {
     const { userId } = useContext(IdContext)
     const userDetail = useSelector(state => state?.userDetails?.userDetailsList)
     const dispatch = useDispatch()
+
     useEffect(() => {
-        // console.log(userId);
         dispatch(showUserDetailSlice(userId))
     }, [userId, dispatch])
-    // console.table(userDetail);
 
     return (
-        <>
-            <Col style={{ backgroundColor: '#f7f7f7', height: '100vmin', alignContent: 'flex-start' }} className='row justify-content-center mt-5' xxl={4}>
-                <Image className='col-8 mt-5 mb-5' style={{ borderRadius: 100, height: '35vmin' }} src='https://www.kindpng.com/picc/m/136-1369892_avatar-people-person-business-user-man-character-avatar.png' />
-                <Container className='col-12'>
-                    <div className='row d-flex justify-content-center mb-3'>
-                        <LinkContainer to={`albums`}>
-                            <Button className='col-2 mr-2 ms-2' variant="danger"  ><img className='pe-2' height={29} src={albumsIcon} alt="album-icon" />Albums</Button>
-                        </LinkContainer>
-                        <LinkContainer to={`todos`}>
-                            <Button className='col-2 mr-2 ms-2' variant="warning" ><img className='pe-2' height={29} src={taskIcon} alt="task-icon" />Todos</Button>
-                        </LinkContainer>
-                        <LinkContainer to={`photos`}>
-                            <Button className='col-2 mr-2 ms-2' variant="primary" ><img className='pe-2' height={29} src={imageIcon} alt="post-icon" />Photos</Button>
-                        </LinkContainer>
-                        <LinkContainer to={`posts`}>
-                            <Button className='col-2 mr-2 ms-2' variant="dark" ><img className='pe-2' height={30} src={postIcon} alt="post-icon" />Posts</Button>
-                        </LinkContainer>
-                        <LinkContainer to={`comments`}>
-                            <Button className='col-2 mr-2 ms-2' variant="info" ><img className='pe-2' height={29} src={commentIcon} alt="post-icon" />Comments</Button>
-                        </LinkContainer>
+        <Container fluid className="px-4 py-5" style={{ backgroundColor: '#fcf8fe', minHeight: '100vh' }}>
+            <Row className="justify-content-center">
+                <Col xxl={10} xl={10} lg={12}>
+                    <Row>
+                        <Col lg={4} className="mb-4">
+                            {/* Profile Header Card */}
+                            <Card className="text-center border-0 shadow-sm mb-4" style={{ borderRadius: '20px', backgroundColor: '#ffffff', overflow: 'hidden' }}>
+                                <div style={{ height: '100px', backgroundColor: '#bbb9f1', background: 'linear-gradient(135deg, #bbb9f1 0%, #e3e0f9 100%)' }}></div>
+                                <Card.Body className="px-4 pb-4" style={{ marginTop: '-50px' }}>
+                                    <Image
+                                        src={`https://i.pravatar.cc/150?u=${userId || 'default'}`}
+                                        roundedCircle
+                                        style={{ width: '100px', height: '100px', border: '4px solid #ffffff', backgroundColor: '#f0ecf6', objectFit: 'cover' }}
+                                        className="mb-3 shadow-sm"
+                                    />
+                                    <h3 style={{ fontFamily: 'Manrope, sans-serif', fontWeight: 800, color: '#32313b' }} className="mb-1">{userDetail?.name}</h3>
+                                    <p style={{ color: '#5b5a8b', fontSize: '1rem', fontWeight: 600 }} className="mb-3">@{userDetail?.username}</p>
+                                    <Badge pill style={{ backgroundColor: '#e3e0f9', color: '#5b5a8b', padding: '0.5em 1em', fontWeight: 600, fontSize: '0.85rem' }}>Active User</Badge>
+                                </Card.Body>
+                            </Card>
 
-                    </div>
-                    <Accordion alwaysOpen>
-                        <Accordion.Item eventKey="0">
-                            <Accordion.Header>Personal Info</Accordion.Header>
-                            <Accordion.Body className='row'>
-                                <Col className='col-4'>Name</Col>
-                                <Col className='col-6'>{userDetail?.name}</Col>
-                                <Col className='col-4'>Email</Col>
-                                <Col className='col-6'>{userDetail?.email}</Col>
-                                <Col className='col-4'>Phone Number</Col>
-                                <Col className='col-6'>{userDetail?.phone}</Col>
-                                <Col className='col-4'>Username</Col>
-                                <Col className='col-6'>@{userDetail?.username}</Col>
-                                <Col className='col-4'>Website</Col>
-                                <Col className='col-6'>{userDetail?.website}</Col>
-                            </Accordion.Body>
-                        </Accordion.Item>
-                        <Accordion.Item eventKey="1">
-                            <Accordion.Header>Address</Accordion.Header>
-                            <Accordion.Body className='row'>
-                                <Col className='col-4'>Suite</Col>
-                                <Col className='col-8'>{userDetail?.address?.suite}</Col>
-                                <Col className='col-4'>Street</Col>
-                                <Col className='col-8'>{userDetail?.address?.street}</Col>
-                                <Col className='col-4'>City</Col>
-                                <Col className='col-8'>{userDetail?.address?.city}</Col>
-                                <Col className='col-4'>Zipcode</Col>
-                                <Col className='col-8 mb-3'>{userDetail?.address?.zipcode}</Col>
-                                <hr />
-                                <Col className='col-2'>Latitude:</Col>
-                                <Col className='col-3'>{userDetail?.address?.geo?.lat}</Col>
-                                <Col className='col-2'>Longitude:</Col>
-                                <Col className='col-3'>{userDetail?.address?.geo?.lng}</Col>
+                            {/* Quick Navigation Card */}
+                            <SectionCard title="Quick Actions">
+                                <Row>
+                                    <Col xs={6}><NavButton to="albums" icon={albumsIcon} label="Albums" variantCode="#5b5a8b" /></Col>
+                                    <Col xs={6}><NavButton to="todos" icon={taskIcon} label="Todos" variantCode="#755478" /></Col>
+                                    <Col xs={6}><NavButton to="photos" icon={imageIcon} label="Photos" variantCode="#5e5d72" /></Col>
+                                    <Col xs={6}><NavButton to="posts" icon={postIcon} label="Posts" variantCode="#4f4e7e" /></Col>
+                                    <Col xs={12}><NavButton to="comments" icon={commentIcon} label="Comments" variantCode="#363564" /></Col>
+                                </Row>
+                            </SectionCard>
+                        </Col>
 
-                            </Accordion.Body>
-                        </Accordion.Item>
-                        <Accordion.Item eventKey="2">
-                            <Accordion.Header>Company</Accordion.Header>
-                            <Accordion.Body className='row'>
-                                <Col className='col-4'>Name</Col>
-                                <Col className='col-8'>{userDetail?.company?.name}</Col>
-                                <Col className='col-4'>Bs</Col>
-                                <Col className='col-8'>{userDetail?.company?.bs}</Col>
-                                <Col className='col-4'>Catch Phrase</Col>
-                                <Col className='col-8'>{userDetail?.company?.catchPhrase}</Col>
+                        <Col lg={8}>
+                            {/* Personal Info */}
+                            <SectionCard title="Personal Information">
+                                <DetailRow label="Email Address" value={<a href={`mailto:${userDetail?.email}`} style={{ color: '#5b5a8b', textDecoration: 'none' }}>{userDetail?.email}</a>} />
+                                <DetailRow label="Phone Number" value={userDetail?.phone} />
+                                <DetailRow label="Website" value={<a href={`http://${userDetail?.website}`} target="_blank" rel="noreferrer" style={{ color: '#5b5a8b', textDecoration: 'none' }}>{userDetail?.website}</a>} />
+                            </SectionCard>
 
-                            </Accordion.Body>
-                        </Accordion.Item>
-                    </Accordion>
+                            <Row>
+                                <Col md={6}>
+                                    {/* Company Info */}
+                                    <SectionCard title="Company Profile">
+                                        <DetailRow label="Company Name" value={userDetail?.company?.name} />
+                                        <DetailRow label="Catchphrase" value={<span style={{ fontStyle: 'italic', color: '#5f5e68' }}>"{userDetail?.company?.catchPhrase}"</span>} />
+                                        <DetailRow label="Business Strategy" value={userDetail?.company?.bs} />
+                                    </SectionCard>
+                                </Col>
+                                <Col md={6}>
+                                    {/* Address Info */}
+                                    <SectionCard title="Address Details">
+                                        <DetailRow label="Street" value={`${userDetail?.address?.suite}, ${userDetail?.address?.street}`} />
+                                        <DetailRow label="City" value={userDetail?.address?.city} />
+                                        <DetailRow label="Zipcode" value={userDetail?.address?.zipcode} />
+                                        <div className="mt-4 pt-3 border-top" style={{ borderColor: '#f0ecf6 !important' }}>
+                                            <p className="mb-0 text-muted" style={{ fontSize: '0.85rem' }}>
+                                                <i className="bi bi-geo-alt-fill me-2"></i>
+                                                Geo: {userDetail?.address?.geo?.lat}, {userDetail?.address?.geo?.lng}
+                                            </p>
+                                        </div>
+                                    </SectionCard>
+                                </Col>
+                            </Row>
 
-                </Container>
-            </Col>
-            <Outlet />
-        </>
+                            {/* Main Content Area for Nested Routes */}
+                            <div className="mt-4">
+                                <Outlet />
+                            </div>
+                        </Col>
+                    </Row>
+                </Col>
+            </Row>
+        </Container>
     )
 }
 
 export default UserDetails
-
-// onClick={dispatch(albums())}
-// onClick={dispatch(todos())}
-// onClick={dispatch(posts())}
