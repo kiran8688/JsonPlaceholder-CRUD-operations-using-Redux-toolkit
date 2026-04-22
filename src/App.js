@@ -15,7 +15,7 @@ export const IdContext = createContext()
 
 function App() {
   const [userId, setUserId] = useState(0)
-  // console.log(userId);
+
   return (<>
        <Navbar className="bg-primary" variant='dark'>
         <Container className='d-flex justify-content-center'>
