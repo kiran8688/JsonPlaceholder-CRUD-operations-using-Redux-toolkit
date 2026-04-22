@@ -13,7 +13,7 @@ const Comments = () => {
     useEffect(() => {
         dispatch(showComments(userId))
     }, [userId, dispatch])
-    console.log(comments);
+
     var commentDisplay
 
     const memoizedCommentsList = useMemo(() => Object.values(comments?.commentsList || {}), [comments?.commentsList])
