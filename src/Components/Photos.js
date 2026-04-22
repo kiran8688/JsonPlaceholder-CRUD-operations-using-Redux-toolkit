@@ -12,7 +12,7 @@ const Photos = () => {
     useEffect(() => {
         dispatch(showPhotosSlice(userId))
     }, [userId, dispatch])
-    console.dir(photo);
+
     var photoDisplay
 
     photoDisplay = Object.values(photo.photos.photosList).map((photo, index) => {
